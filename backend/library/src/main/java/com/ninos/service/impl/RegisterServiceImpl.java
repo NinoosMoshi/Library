@@ -70,6 +70,29 @@ public class RegisterServiceImpl implements RegisterService {
         return registerMapper.registerEntityToDto(savedRegister);
     }
 
+
+    @Override
+    public void deleteRegister(Long id) {
+        registerRepository.deleteById(id);
+    }
+
+
+
+    @Override
+    public List<RegisterDTO> getRegisterByMemberId(Long memberId) {
+        List<CheckoutRegister> registers = registerRepository.findByMemberId(memberId);
+        return registers.stream().map(registerMapper::registerEntityToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RegisterDTO> getRegisterByBookId(Long bookId) {
+        List<CheckoutRegister> registers = registerRepository.findByBookId(bookId);
+        return registers.stream().map(registerMapper::registerEntityToDto).collect(Collectors.toList());
+    }
+
+
+
+
     private void calculateOverdueFine(CheckoutRegister register) {
         if (register.getReturnDate() != null && register.getReturnDate().isAfter(register.getDueDate())) {
             // calculate how many days between the date pass and return

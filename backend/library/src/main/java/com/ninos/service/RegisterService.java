@@ -14,4 +14,10 @@ public interface RegisterService {
 
     RegisterDTO updateRegister(RegisterDTO registerDTO);
 
+    void deleteRegister(Long id);
+
+    List<RegisterDTO> getRegisterByMemberId(Long memberId);
+
+    List<RegisterDTO> getRegisterByBookId(Long bookId);
+
 }

@@ -45,5 +45,24 @@ public class RegisterController {
         return new ResponseEntity<>(updatedRegister, HttpStatus.OK);
     }
 
+    @DeleteMapping("/deleteRegister/{id}")
+    public ResponseEntity<String> deleteRegisterById(@PathVariable("id") Long id) {
+        registerService.deleteRegister(id);
+        return new ResponseEntity<>("Register successfully deleted", HttpStatus.OK);
+    }
+
+
+    @GetMapping("/member/{memberId}")
+    public ResponseEntity<List<RegisterDTO>> getRegisterByMember(@PathVariable Long memberId) {
+        List<RegisterDTO> registerDTOList = registerService.getRegisterByMemberId(memberId);
+        return ResponseEntity.ok().body(registerDTOList);
+    }
+
+    @GetMapping("/book/{bookId}")
+    public ResponseEntity<List<RegisterDTO>> getRegisterByBook(@PathVariable Long bookId) {
+        List<RegisterDTO> registerDTOList = registerService.getRegisterByBookId(bookId);
+        return ResponseEntity.ok().body(registerDTOList);
+    }
+
 
 }
