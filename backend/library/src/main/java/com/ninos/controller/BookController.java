@@ -3,6 +3,8 @@ package com.ninos.controller;
 import com.ninos.dto.BookDTO;
 import com.ninos.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
+
+    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     private final BookService bookService;
 
@@ -27,6 +31,7 @@ public class BookController {
     @GetMapping("/listBook")
     public ResponseEntity<List<BookDTO>> getAllBooks() {
         List<BookDTO> books = bookService.getAllBooks();
+        logger.info("get all book {}", books);
         return ResponseEntity.ok().body(books);
     }
 
