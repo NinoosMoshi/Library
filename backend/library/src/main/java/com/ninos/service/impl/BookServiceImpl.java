@@ -2,6 +2,7 @@ package com.ninos.service.impl;
 
 import com.ninos.dto.BookDTO;
 import com.ninos.entity.Book;
+import com.ninos.exception.ResourceNotFoundException;
 import com.ninos.mapper.BookMapper;
 import com.ninos.repository.BookRepository;
 import com.ninos.service.BookService;
@@ -41,13 +42,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDTO getBookById(Long bookId) {
-        Book book = bookRepository.findById(bookId).get();
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow( () -> new ResourceNotFoundException("Book", "ID", bookId));
         return BookMapper.bookEntityToDto(book);
     }
 
     @Override
     public BookDTO updateBook(BookDTO bookDTO) {
-        Book book = bookRepository.findById(bookDTO.getId()).get();
+        Book book = bookRepository.findById(bookDTO.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Book", "ID", bookDTO.getId()));
         updateBookEntityFromDTO(book,bookDTO);
         Book savedBook = bookRepository.save(book);
         return BookMapper.bookEntityToDto(savedBook);
@@ -55,6 +58,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteBookById(Long bookId) {
+        if(!bookRepository.existsById(bookId)){
+            throw new ResourceNotFoundException("Book", "ID", bookId);
+        }
         bookRepository.deleteById(bookId);
     }
 

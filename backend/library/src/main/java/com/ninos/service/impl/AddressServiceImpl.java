@@ -2,6 +2,7 @@ package com.ninos.service.impl;
 
 import com.ninos.dto.AddressDTO;
 import com.ninos.entity.Address;
+import com.ninos.exception.ResourceNotFoundException;
 import com.ninos.mapper.AddressMapper;
 import com.ninos.repository.AddressRepository;
 import com.ninos.service.AddressService;
@@ -36,14 +37,16 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDTO getAddressById(Long id) {
-        Address address = addressRepository.findById(id).get();
+        Address address = addressRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Address", "ID", id));
         return AddressMapper.addressEntityToDto(address);
     }
 
 
     @Override
     public AddressDTO updateAddress(AddressDTO addressDTO) {
-        Address address = addressRepository.findById(addressDTO.getId()).get();
+        Address address = addressRepository.findById(addressDTO.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Address", "ID", addressDTO.getId()));
         updateAddressEntityFromDTO(address,addressDTO);
         Address savedAddress = addressRepository.save(address);
         return AddressMapper.addressEntityToDto(savedAddress);
@@ -51,6 +54,9 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void deleteAddressById(Long addressId) {
+        if(!addressRepository.existsById(addressId)){
+            throw new ResourceNotFoundException("Address", "ID", addressId);
+        }
         addressRepository.deleteById(addressId);
     }
 
