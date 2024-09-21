@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "postal_addresses")
-public class Address {
+public class PostalAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Address {
 
     @Column(nullable = false)
     private String streetNumber;
-    
+
     private String zipCode;
 
     @Column(nullable = false)

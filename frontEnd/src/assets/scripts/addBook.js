@@ -7,22 +7,22 @@ document.addEventListener('DOMContentLoaded', () => {
         ev.preventDefault();
 
         const formData = {
-            title: document.getElementById('title').value,
-            author: document.getElementById('author').value,
-            isbn: document.getElementById('isbn').value,
-            publisher: document.getElementById('publisher').value,
-            yearPublished: document.getElementById('yearPublished').value,
-            placePublished: document.getElementById('placePublished').value,
-            noOfAvailableCopies: document.getElementById('noOfAvailableCopies').value,
-            barcodeNumber: document.getElementById('barcodeNumber').value
-        }
+          title: document.getElementById('title').value,
+          author: document.getElementById('author').value,
+          isbn: document.getElementById('isbn').value,
+          publisher: document.getElementById('publisher').value,
+          yearOfPublication: document.getElementById('yearPublished').value,
+          placeOfPublication: document.getElementById('placePublished').value,
+          noOfAvailableCopies: document.getElementById('noOfAvailableCopies').value,
+          barcodeNumber: document.getElementById('barcodeNumber').value
+      }
 
-        addNewBook(formData);
+        addNewBook(formData, form);
      });
    });
 
 
-   function addNewBook(data) {
+   function addNewBook(data, form) {
 
     console.log('Attempting to add new book with data', data);
       
@@ -43,10 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(data => {
         console.log('Book added successfully: ', data);
         alert('New book added successfully!');
+        form.reset();
       })
       .catch(error =>{
-        console.error('Error adding new book:', error);
-        alert('Failed to add new book. Please try again.');
+        console.error('Error:', error);
+        alert('An error occured.');
       });
 
    }

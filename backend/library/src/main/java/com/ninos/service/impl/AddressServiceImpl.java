@@ -1,7 +1,7 @@
 package com.ninos.service.impl;
 
 import com.ninos.dto.AddressDTO;
-import com.ninos.entity.Address;
+import com.ninos.entity.PostalAddress;
 import com.ninos.exception.ResourceNotFoundException;
 import com.ninos.mapper.AddressMapper;
 import com.ninos.repository.AddressRepository;
@@ -21,35 +21,35 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDTO createAddress(AddressDTO addressDTO) {
-        Address address = AddressMapper.addressDtoToEntity(addressDTO);
-        Address savedAddress = addressRepository.save(address);
+        PostalAddress postalAddress = AddressMapper.addressDtoToEntity(addressDTO);
+        PostalAddress savedPostalAddress = addressRepository.save(postalAddress);
 
-        return AddressMapper.addressEntityToDto(savedAddress);
+        return AddressMapper.addressEntityToDto(savedPostalAddress);
     }
 
 
     @Override
     public List<AddressDTO> getAllAddresses() {
-        List<Address> addressList = addressRepository.findAll();
-        return addressList.stream().map(AddressMapper::addressEntityToDto).collect(Collectors.toList());
+        List<PostalAddress> postalAddressList = addressRepository.findAll();
+        return postalAddressList.stream().map(AddressMapper::addressEntityToDto).collect(Collectors.toList());
     }
 
 
     @Override
     public AddressDTO getAddressById(Long id) {
-        Address address = addressRepository.findById(id)
+        PostalAddress postalAddress = addressRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Address", "ID", id));
-        return AddressMapper.addressEntityToDto(address);
+        return AddressMapper.addressEntityToDto(postalAddress);
     }
 
 
     @Override
     public AddressDTO updateAddress(AddressDTO addressDTO) {
-        Address address = addressRepository.findById(addressDTO.getId())
+        PostalAddress postalAddress = addressRepository.findById(addressDTO.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Address", "ID", addressDTO.getId()));
-        updateAddressEntityFromDTO(address,addressDTO);
-        Address savedAddress = addressRepository.save(address);
-        return AddressMapper.addressEntityToDto(savedAddress);
+        updateAddressEntityFromDTO(postalAddress,addressDTO);
+        PostalAddress savedPostalAddress = addressRepository.save(postalAddress);
+        return AddressMapper.addressEntityToDto(savedPostalAddress);
     }
 
     @Override
@@ -60,13 +60,13 @@ public class AddressServiceImpl implements AddressService {
         addressRepository.deleteById(addressId);
     }
 
-    public void updateAddressEntityFromDTO(Address address, AddressDTO addressDTO) {
-        if(addressDTO.getStreetName() != null) address.setStreetName(addressDTO.getStreetName());
-        if(addressDTO.getStreetNumber() != null) address.setStreetNumber(addressDTO.getStreetNumber());
-        if(addressDTO.getZipCode() != null) address.setZipCode(addressDTO.getZipCode());
-        if(addressDTO.getPlaceName() != null) address.setPlaceName(addressDTO.getPlaceName());
-        if(addressDTO.getCountry() != null) address.setCountry(addressDTO.getCountry());
-        if(addressDTO.getAdditionalInfo() != null) address.setAdditionalInfo(addressDTO.getAdditionalInfo());
+    public void updateAddressEntityFromDTO(PostalAddress postalAddress, AddressDTO addressDTO) {
+        if(addressDTO.getStreetName() != null) postalAddress.setStreetName(addressDTO.getStreetName());
+        if(addressDTO.getStreetNumber() != null) postalAddress.setStreetNumber(addressDTO.getStreetNumber());
+        if(addressDTO.getZipCode() != null) postalAddress.setZipCode(addressDTO.getZipCode());
+        if(addressDTO.getPlaceName() != null) postalAddress.setPlaceName(addressDTO.getPlaceName());
+        if(addressDTO.getCountry() != null) postalAddress.setCountry(addressDTO.getCountry());
+        if(addressDTO.getAdditionalInfo() != null) postalAddress.setAdditionalInfo(addressDTO.getAdditionalInfo());
     }
 
 

@@ -2,8 +2,6 @@ package com.ninos.dto;
 
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 public class MemberDTO {
 
@@ -14,9 +12,9 @@ public class MemberDTO {
     private AddressDTO address;
     private String email;
     private String phone;
+    private String barcodeNumber;
     private String membershipStarted;
     private String membershipEnded;
     private Boolean isActive;
-    private String barcodeNumber;
 
 }

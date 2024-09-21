@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -29,7 +28,7 @@ public class Member {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "postal_address_id")
-    private Address address;
+    private PostalAddress postalAddress;
 
     private String email;
 
@@ -45,6 +44,5 @@ public class Member {
 
     @Column(nullable = false)
     private String barcodeNumber;
-
 
 }

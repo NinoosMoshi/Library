@@ -2,6 +2,7 @@ package com.ninos.mapper;
 
 import com.ninos.dto.MemberDTO;
 import com.ninos.entity.Member;
+import com.ninos.entity.PostalAddress;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDate;
@@ -13,14 +14,17 @@ public class MemberMapper {
         MemberDTO memberDTO = new MemberDTO();
 
         // store localDate as String
+
+//         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+
         if(member.getDateOfBirth() != null){
             memberDTO.setDateOfBirth(member.getDateOfBirth().format(formatter));
         }
 
         // map postal address
-        if(member.getAddress() != null){
-            memberDTO.setAddress(AddressMapper.addressEntityToDto(member.getAddress()));
+        if(member.getPostalAddress() != null){
+            memberDTO.setAddress(AddressMapper.addressEntityToDto(member.getPostalAddress()));
         }
 
         if(member.getMembershipStarted() != null){
@@ -33,6 +37,7 @@ public class MemberMapper {
 
         BeanUtils.copyProperties(member,memberDTO);
         return memberDTO;
+
     }
 
 
@@ -44,11 +49,14 @@ public class MemberMapper {
 
         // address mapping
         if(memberDTO.getAddress() != null){
-            member.setAddress(AddressMapper.addressDtoToEntity(memberDTO.getAddress()));
+            member.setPostalAddress(AddressMapper.addressDtoToEntity(memberDTO.getAddress()));
         }
 
         member.setMembershipStarted(LocalDate.parse(memberDTO.getMembershipStarted()));
-        member.setMembershipEnded(LocalDate.parse(memberDTO.getMembershipEnded()));
+
+        if(memberDTO.getMembershipEnded() != null){
+            member.setMembershipEnded(LocalDate.parse(memberDTO.getMembershipEnded()));
+        }
 
         BeanUtils.copyProperties(memberDTO,member);
         return member;

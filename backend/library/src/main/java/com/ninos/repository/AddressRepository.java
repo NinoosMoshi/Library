@@ -1,7 +1,7 @@
 package com.ninos.repository;
 
-import com.ninos.entity.Address;
+import com.ninos.entity.PostalAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AddressRepository extends JpaRepository<Address,Long> {
+public interface AddressRepository extends JpaRepository<PostalAddress,Long> {
 }
