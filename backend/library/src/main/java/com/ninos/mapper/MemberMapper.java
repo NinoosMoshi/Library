@@ -2,11 +2,11 @@ package com.ninos.mapper;
 
 import com.ninos.dto.MemberDTO;
 import com.ninos.entity.Member;
-import com.ninos.entity.PostalAddress;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 
 public class MemberMapper {
 

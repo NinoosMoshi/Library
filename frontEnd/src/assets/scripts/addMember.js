@@ -9,27 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date().toISOString().split('T')[0];
         console.log('Today: ', today);
 
-        // {
-        //   "id": 0,
-        //   "firstName": "nahrain",
-        //   "lastName": "koka",
-        //   "dateOfBirth": "04-05-1986",
-        //   "address": {
-        //     "id": 0,
-        //     "streetName": "grace",
-        //     "streetNumber": "9009",
-        //     "zipCode": "60714",
-        //     "placeName": "mortongrove",
-        //     "country": "usa",
-        //     "additionalInfo": "string"
-        //   },
-        //   "email": "nahrain@gmail.com",
-        //   "phone": "string",
-        //   "membershipStarted": "string",
-        //   "membershipEnded": "string",
-        //   "isActive": true,
-        //   "barcodeNumber": "123"
-        // }
 
         const formData = {
           firstName: document.getElementById('firstName').value,
