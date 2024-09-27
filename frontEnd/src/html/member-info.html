@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>Member Info: </h1><!--insert full name of member-->
+    <h1>Member Info: <span id="memberFullName"></span></h1><!--insert full name of member-->
 
     <form>
         <table>
@@ -37,6 +37,10 @@
                 <td id="membershipStarted"></td>
             </tr>
             <tr>
+                <td>Membership ended:</td>
+                <td id="membershipEnded"></td>
+            </tr>
+            <tr>
                 <td>Membership status:</td>
                 <td id="memberStatus"></td>
             </tr>
@@ -55,6 +59,8 @@
     <a href="member-history.html">Member History</a>
     <a href="edit-member.html">EditMember</a>
     <a href="#">Change Membership Status</a>
+
+    <script src="../assets/scripts/infoMember.js"></script>
 
     <a href="home.html">Back to Home</a>
     <a href="javascript:history.back()">Back to previous page</a>
